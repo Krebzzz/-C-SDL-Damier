@@ -6,6 +6,7 @@
 
 void SDL_ExitWithError(char *message);
 int SDL_DrawColor(SDL_Renderer *renderer, SDL_Color *color);
+void pause();
 //--------------------------------------
 
 int main(int argc, char *argv[])
@@ -45,15 +46,33 @@ int main(int argc, char *argv[])
     {
         SDL_ExitWithError("Erreur Création Damier");
     }
-    
-    SDL_SetWindowTitle(window, "Damier");
-    SDL_RenderPresent(renderer);
+//--------------------------------------
 
-    SDL_Delay(6000);
+    SDL_SetWindowTitle(window, "Damier Simple");
+    SDL_RenderPresent(renderer);
+//--------------------------------------
+    pause();
+//--------------------------------------
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit(); 
     return EXIT_SUCCESS; 
+}
+//--------------------------------------
+void pause()
+{
+    int continuer = 1;
+    SDL_Event event;
+ 
+    while (continuer)
+    {
+        SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                continuer = 0;
+        }
+    }
 }
 
 int SDL_DrawColor(SDL_Renderer *renderer, SDL_Color *color){
